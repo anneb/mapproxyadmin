@@ -1,17 +1,20 @@
-import {LitElement, html, css} from 'lit-element';
-
+import { LitElement, html, css } from "../node_modules/lit-element/lit-element.js";
 /**
 * @polymer
 * @extends HTMLElement
 */
+
 class MpAccordion extends LitElement {
-    static get properties() {
-        return {
-            open: {type: Boolean}
-        }
-    }
-    static get styles() {
-        return css `
+  static get properties() {
+    return {
+      open: {
+        type: Boolean
+      }
+    };
+  }
+
+  static get styles() {
+    return css`
             :host {
                 display: block;
             }
@@ -42,20 +45,24 @@ class MpAccordion extends LitElement {
             .active:after {
                 content: "-"; 
             }
-        `
-    }
-    constructor() {
-        super();
-        this.open = false;
-    }
-    render(){
-        return html`
-            <button class="accordion${this.open?' active':''}" @click="${e=>this.handleClick(e)}"><slot></slot></button>
-            `
-    }
-    handleClick(e) {
-        this.open = !this.open;
-    }
+        `;
+  }
+
+  constructor() {
+    super();
+    this.open = false;
+  }
+
+  render() {
+    return html`
+            <button class="accordion${this.open ? ' active' : ''}" @click="${e => this.handleClick(e)}"><slot></slot></button>
+            `;
+  }
+
+  handleClick(e) {
+    this.open = !this.open;
+  }
+
 }
 
 window.customElements.define('mp-accordion', MpAccordion);

@@ -40,7 +40,7 @@ app.get('/mapproxyread/:mpconfig', (req, res) => {
 
 app.post('/mapproxyupdate/:mpconfig', (req, res) => {
     const mpconfig = sanitize(req.params.mpconfig);
-    const yaml = jsyaml.safeDump(req.body, {styles: {'!!null': ''}});
+    const yaml = jsyaml.dump(req.body, {styles: {'!!null': ''}});
     fsPromises.writeFile(pathJoin([config.mapproxydir,config.mapproxy_projects,mpconfig]), yaml)
         .then(()=>res.json({name: mpconfig, result: "saved"}))
         .catch((error)=>res.json({name: mpconfig, error: error}));
@@ -210,7 +210,7 @@ function getCachePaths(mpconfig, cachename) {
 function readYaml(mpconfig) {
     const fullpath = pathJoin([config.mapproxydir,config.mapproxy_projects,mpconfig]);
     return fsPromises.readFile(fullpath).then(data=>{
-        return {name: mpconfig, config: jsyaml.safeLoad(data)};
+        return {name: mpconfig, config: jsyaml.load(data)};
     }).catch(error=>{
         if (error.code === 'ENOENT') {
             return {name: mpconfig, error: `${mpconfig} not found`}
