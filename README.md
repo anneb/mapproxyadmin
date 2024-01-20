@@ -27,7 +27,7 @@ configurations are assumed to be subdirectories of this root directory.
 
 2. copy public/config.json.example to public/config.json and edit the following settings to match your system configuration:
 
-        "adminserver" : "http://host.example.com:8083/",
+        "adminserver" : "http://localhost:8083/",
         "mapproxydir" : "/path/to/root/of/mapproxy",
         "mapproxy_projects": "projects",
         "mapproxy_cache": "mp"
@@ -44,7 +44,7 @@ configurations are assumed to be subdirectories of this root directory.
 
         node index.js
 
-5. open http://host.example.com:8083 in your browser
+5. open http://localhost:8083 in your browser
 
 For MapProxyAdmin to function properly, it should have permissions to alter files in the cache directories and the MultiMapProxy config directory. This can be achieved by letting node run under the same account as MapProxy. For instance, if MapProxy is running as a wsgi service under Linux Apache, then node should run under account www-data:
 
@@ -53,29 +53,7 @@ For MapProxyAdmin to function properly, it should have permissions to alter file
 For security, it is strongly advised to thoroughly restrict access to MapProxyAdmin. Users can easily destroy your MapProxy configuration or may find ways to change files on your file system (although some basic measures were taken to try to prevent this).
 
 ## Develop
-The MapProxyAdmin source code for both client and server are JavaScript. The server uses Node and some node modules (Express, WMSCapabilities and JSYaml to name some), the client is based on WebComponents using [Polymer](https://www.polymer-project.org/) LitElement and LitHtml.
-
-
-### Server dev, now deprecated, use vscode
-The server code is in index.js. Use a debugger to set breakpoints and step through the code. 
-
-1. start node in debug mode:
-
-        node --inspect index.js
-
-2. To open the debugger in the (Chrome) browser, type
-
-        chrome://inspect
-    
-    in the address bar. Set breakpoints to step through the code
-
-### Client dev
-The source code for the browser client resides in directory /public. 
-
-
-
-
-
+The dependency on Polymer for the webcomponents has been removed. The webclient now uses bundled lit code from cdn.jsdelivr.net
 
 
 
