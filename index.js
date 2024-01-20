@@ -1,14 +1,10 @@
 #!/usr/bin/env nodejs
 
 const createWmsUrl = require('./wmsurl.js');
-//const DOMParser = global.DOMParser = require('xmldom').DOMParser;
-//cp iconst window = global;
-//const WMSCapabilities =  require('wms-capabilities');
 const WMSCapabilities = require('wms-capabilities');
-const DOMParser = require('xmldom').DOMParser;
+const DOMParser = require('@xmldom/xmldom').DOMParser;
 const express = require('express');
 const app = express();
-const axios = require('axios');
 const fs = require('fs');
 const fsPromises = fs.promises;
 const jsyaml = require('js-yaml');
@@ -220,14 +216,15 @@ function readYaml(mpconfig) {
 }
 
 async function getcapabilities(wmsUrl) {
-    const response = await axios.get(wmsUrl);       
-    if (response.status >= 200 && response.status < 300) {
-        const contentType = response.headers['content-type'];
+    const response = await fetch(wmsUrl);       
+    if (response.ok) {
+        const contentType = response.headers.get('content-type');
         if (contentType && (contentType.startsWith('application/vnd.ogc.wms_xml') || contentType.startsWith('text/xml') || contentType.startsWith('application/xml'))) {
-            const json = new WMSCapabilities(response.data, DOMParser).toJSON();
+            const text = await response.text();
+            const json = new WMSCapabilities(text, DOMParser).toJSON();
             if (!json.Capability) {
                 // invalid wms-capabilities
-                json.data = response.data;
+                json.data = text;
             }
             json.wmsurl = wmsUrl;
             return json;
