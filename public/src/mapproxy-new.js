@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "../node_modules/lit-element/lit-element.js";
+import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import "./mapproxy-config.js";
 import "./mapproxy-getcaps.js";
 import "./mp-accordion.js";

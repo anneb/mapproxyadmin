@@ -1,5 +1,4 @@
-import { LitElement, html, css } from "../node_modules/lit-element/lit-element.js";
-import { unsafeHTML } from "../node_modules/lit-html/directives/unsafe-html.js";
+import {LitElement, html, css, unsafeHTML} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js'
 import { pathJoin } from './util.js';
 import "./mp-accordion.js";
 

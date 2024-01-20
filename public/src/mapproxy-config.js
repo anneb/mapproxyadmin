@@ -1,10 +1,5 @@
-import { LitElement, html, css } from "../node_modules/lit-element/lit-element.js";
+import {LitElement, html, css} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import "./mp-accordion.js";
-/**
-* @polymer
-* @extends HTMLElement
-*/
-
 class MapproxyConfig extends LitElement {
   static get properties() {
     return {
