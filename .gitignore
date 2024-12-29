@@ -1,6 +1,13 @@
 #private configuration
 config.json
 
+#mapproxy directory contents
+mapproxy/*
+mapproxy/* **/
+!mapproxy/projects/.gitkeep
+!mapproxy/projects/mp/.gitkeep
+
+
 # Logs
 logs
 *.log
